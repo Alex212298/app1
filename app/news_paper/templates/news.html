@@ -1,5 +1,5 @@
 {% extends "default.html" %}
-
+{% load custom_filters %}
 {% block content %}
 <h2>Всего новостей : {{ news|length }}</h2>
 <table>
@@ -10,9 +10,9 @@
     </tr>
 {% for m in news %}
     <tr>
-        <td style="text-align:center">{{ m.title }}</td>
+        <td style="text-align:center"><a href="/news/{{ m.pk }}">{{ m.title|censor }}</a></td>
         <td style="text-align:center">{{ m.dateCreate|date:'M d Y' }}</td>
-        <td style="text-align:center">{{ m.preview }}</td>
+        <td style="text-align:center">{{ m.preview|censor }}</td>
     </tr>
 {% endfor %}
     </table>
