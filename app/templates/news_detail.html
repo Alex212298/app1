@@ -1,0 +1,7 @@
+{% extends "default.html" %}
+
+{% block content %}
+<h1>{{  one_news.title }}</h1>
+<h3>Дата публикации: {{ one_news.dateCreate|date:'d m Y' }}</h3>
+<h4>{{ one_news.text }}</h4>
+{% endblock content %}
