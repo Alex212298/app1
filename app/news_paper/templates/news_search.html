@@ -1,7 +1,7 @@
 {% extends "default.html" %}
 {% load custom_filters %}
 {% block content %}
-<h2>Всего новостей : {{ news|length }}</h2>
+<h2>Всего новостей : {{ count }}</h2>
 <form method="GET">
     {{ filter.form }} <!-- Форму от фильтров за нас сделает Django. А вот кнопку, увы, придётся делать самому -->
     <input type="submit" value="Найти">

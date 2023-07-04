@@ -7,8 +7,6 @@ class Author (models.Model):
     authorUser = models.OneToOneField(User, on_delete=models.CASCADE)
     rating = models.SmallIntegerField(default=0)
 
-    def __str__(self):
-        return self.authorUser if self.authorUser else "Нет пользователя"
 
     def update_rating(self):
         postRat = self.post_set.all().aggregate(postRating=Sum('rating'))
@@ -29,7 +27,8 @@ class Author (models.Model):
         self.save()
 
     def __str__(self):
-        return self.authorUser
+        return self.authorUser.username
+
 
 class Category (models.Model):
     categoryName = models.CharField(max_length=65, unique=True)
@@ -72,6 +71,9 @@ class Post (models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return f'/news/'
 
 class PostCategory (models.Model):
     postTR = models.ForeignKey(Post, on_delete=models.CASCADE)
