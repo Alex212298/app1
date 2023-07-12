@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load custom_tags %}
     <meta charset="UTF-8">
     <title>{{ title }}</title>
 </head>
 <body>
+{% if user.is_authenticated %}
+<h2>Привет - {{ request.user.username }} / <a href="{% url 'account_logout' %}">Выйти</a></h2>
+    {% if request.user|user_in_group:"authors" %}
+        <h3>Вы являетесь автором</h3>
+    {% else %}
+        <h3><a href="{% url 'add_to_group' %}">Стать автором</a></h3>
+    {% endif %}
+{% else %}
+<h2>Вы не авторизованы / <a href="{% url 'account_login' %}">Авторизоваться</a></h2>
+{% endif %}
 {% block content %}
 {% endblock content %}
-
 </body>
 </html>

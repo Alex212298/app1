@@ -8,4 +8,5 @@ urlpatterns = [
     path('news/add/', PostCreateView.as_view(), name='post_create'),
     path('news/<int:pk>/update', PostUpdateView.as_view(), name='post_update'),
     path('news/<int:pk>/delete', PostDeleteView.as_view(), name='post_delete'),
+    path('add_to_group/', add_to_group, name='add_to_group'),
 ]
