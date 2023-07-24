@@ -1,12 +1,14 @@
 from datetime import datetime
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect
 
 from .filters import PostFilter
 from .forms import PostForm
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from django.contrib.auth.models import Group
+from django.urls import reverse
+from django.core.mail import send_mail
 
 from .models import *
 
@@ -54,6 +56,9 @@ class PostCreateView(PermissionRequiredMixin, CreateView):
     template_name = 'news_create.html'
     permission_required = ('news_paper.add_post')
     form_class = PostForm
+    # send_mail(
+    #     subject=f'{Post.title}'
+    # )
 
 class PostUpdateView(PermissionRequiredMixin, UpdateView):
     template_name = 'news_create.html'
@@ -80,3 +85,25 @@ def add_to_group(request):
     Author.objects.create(authorUser=User.objects.get(username=user.username))
     user.groups.add(group)
     return redirect('/news/')
+
+class CategoryDetailView(DetailView):
+    model = Category
+    template_name = 'category.html'
+    context_object_name = 'cat'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        category = Category.objects.get(id=self.kwargs['pk'])
+        context['subscribers'] = category.subscribes.all()
+        return context
+
+def subscribe(request, pk):
+    category = Category.objects.get(pk=pk)
+    category.subscribes.add(request.user.id)
+    return HttpResponseRedirect(reverse('cat', args=[pk]))
+
+
+def unsubscribe(request, pk):
+    category = Category.objects.get(pk=pk)
+    category.subscribes.remove(request.user.id)
+    return HttpResponseRedirect(reverse('cat', args=[pk]))

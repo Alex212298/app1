@@ -8,6 +8,7 @@
         <td style="text-align:center">Дата публикации</td>
         <td style="text-align:center">Превью</td>
         <td style="text-align:center">Действия</td>
+        <td style="text-align:center">Категория</td>
     </tr>
 {% for m in news %}
     <tr>
@@ -15,6 +16,10 @@
         <td style="text-align:center">{{ m.dateCreate|date:'M d Y' }}</td>
         <td style="text-align:center">{{ m.preview|censor }}</td>
         <td style="text-align:center"><a href="/news/{{ m.pk }}/update"> Редактировать</a> / <a href="/news/{{ m.pk }}/delete"> Удалить</a></td>
+        <td style="text-align:center">
+            {% for cat in m.postCategory.all %}
+            <a href="{% url 'cat' cat.id %}"> {{ cat }}</a></td>
+            {% endfor %}
     </tr>
 {% endfor %}
     </table>
