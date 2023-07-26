@@ -18,8 +18,9 @@
         <td style="text-align:center"><a href="/news/{{ m.pk }}/update"> Редактировать</a> / <a href="/news/{{ m.pk }}/delete"> Удалить</a></td>
         <td style="text-align:center">
             {% for cat in m.postCategory.all %}
-            <a href="{% url 'cat' cat.id %}"> {{ cat }}</a></td>
+            <a href="{% url 'cat' cat.id %}"> {{ cat }}</a>
             {% endfor %}
+        </td>
     </tr>
 {% endfor %}
     </table>

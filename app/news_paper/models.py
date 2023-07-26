@@ -41,7 +41,7 @@ class CategorySub(models.Model):
     subscriber = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.category}"
 class Post (models.Model):
     postAuthor = models.ForeignKey(Author, on_delete=models.CASCADE)
     NEWS = 'NW'
