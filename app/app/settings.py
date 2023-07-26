@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'news_paper',
 ]
-
+DEFAULT_FROM_EMAIL = 'rassylkovna@yandex.ru'
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/news/search/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/news/'
@@ -146,3 +147,4 @@ EMAIL_PORT = 465 # порт smtp сервера тоже одинаковый
 EMAIL_HOST_USER = 'rassylkovna@yandex.ru' # ваше имя пользователя, например если ваша почта user@yandex.ru, то сюда надо писать user, иными словами, это всё то что идёт до собаки
 EMAIL_HOST_PASSWORD = 'sgrtirfvjztselwk'# пароль от почты
 EMAIL_USE_SSL = True # Яндекс использует ssl, подробнее о том, что это, почитайте на Википедии, но включать его здесь обязательно
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
