@@ -46,8 +46,11 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    'news_paper',
+    'news_paper.apps.NewsPaperConfig',
+    'django_apscheduler',
 ]
+APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
+APSCHEDULER_RUN_NOW_TIMEOUT = 25
 DEFAULT_FROM_EMAIL = 'rassylkovna@yandex.ru'
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 LOGIN_URL = '/accounts/login/'

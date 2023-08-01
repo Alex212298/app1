@@ -58,31 +58,6 @@ class PostCreateView(PermissionRequiredMixin, CreateView):
     permission_required = ('news_paper.add_post')
     form_class = PostForm
 
-    def form_valid(self, form):
-        self.object = form.save()
-
-        self.postCategory_list = self.object.postCategory.all()
-
-        for category in self.postCategory_list:
-
-            for sub in category.subscribes.all():
-                html_content = render_to_string('post_created.html',
-                                                {
-                                                    'user': sub,
-                                                    'post': self.object,
-                                                })
-
-                msg = EmailMultiAlternatives(
-                    subject=f'{self.object.title}',
-                    body=self.object.text,
-                    from_email='rassylkovna@yandex.ru',
-                    to=[f'{sub.email}']
-
-                )
-                msg.attach_alternative(html_content, "text/html")
-                msg.send()
-                return redirect('news')
-
 
 class PostUpdateView(PermissionRequiredMixin, UpdateView):
     template_name = 'news_create.html'
