@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Selection for the week</title>
+</head>
+<body>
+ <h1>Hi, this is a weekly selection in your favorite category - {{ category }}</h1>
+
+{% for post in posts %}
+    <a href="http://127.0.0.1:8000/news/{{ post.pk }}/"> {{ post.title }}</a>
+{% endfor %}
+
+
+</body>
+</html>

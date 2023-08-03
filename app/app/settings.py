@@ -151,3 +151,9 @@ EMAIL_HOST_USER = 'rassylkovna@yandex.ru' # ваше имя пользовате
 EMAIL_HOST_PASSWORD = 'sgrtirfvjztselwk'# пароль от почты
 EMAIL_USE_SSL = True # Яндекс использует ssl, подробнее о том, что это, почитайте на Википедии, но включать его здесь обязательно
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': os.path.join(BASE_DIR, 'cache_files'),
+    }
+}
